@@ -14,27 +14,32 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
 
   private final CustomUserDetailsService userDetailsService;
   private final JwtAuthenticationFilter jwtAuthenticationFilter;
+  private final CorsConfigurationSource corsConfigurationSource;
 
   public SecurityConfig(CustomUserDetailsService userDetailsService,
-                        JwtAuthenticationFilter jwtAuthenticationFilter) {
+                        JwtAuthenticationFilter jwtAuthenticationFilter,
+                        CorsConfigurationSource corsConfigurationSource) {
     this.userDetailsService = userDetailsService;
     this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    this.corsConfigurationSource = corsConfigurationSource;
   }
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
+        .cors(cors -> cors.configurationSource(corsConfigurationSource))
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/ping", "/auth/register", "/auth/login").permitAll()
+            .requestMatchers("/ping", "/auth/register", "/auth/login", "/actuator/health").permitAll()
             .anyRequest().authenticated())
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     return http.build();

@@ -11,8 +11,14 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(unique = true)
+  private String username;
+
   @Column(nullable = false, unique = true)
   private String email;
+
+  @Column(unique = true)
+  private String phoneNumber;
 
   @Column(nullable = false)
   private String passwordHash;
@@ -75,5 +81,21 @@ public class User {
 
   public Instant getCreatedAt() {
     return createdAt;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 }

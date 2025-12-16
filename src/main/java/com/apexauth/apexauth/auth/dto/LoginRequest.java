@@ -1,23 +1,21 @@
 package com.apexauth.apexauth.auth.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class LoginRequest {
 
-  @Email
-  @NotBlank
-  private String email;
+  @NotBlank(message = "Username, email, or phone is required")
+  private String identifier; // Can be email, username, or phone
 
-  @NotBlank
+  @NotBlank(message = "Password is required")
   private String password;
 
-  public String getEmail() {
-    return email;
+  public String getIdentifier() {
+    return identifier;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setIdentifier(String identifier) {
+    this.identifier = identifier;
   }
 
   public String getPassword() {

@@ -46,18 +46,18 @@ public class AuthService {
   }
 
   public AuthResponse login(LoginRequest request) {
-    // authenticate using Spring Security
+    // Authenticate using identifier (email, username, or phone)
     try {
       UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-          request.getEmail(),
+          request.getIdentifier(),
           request.getPassword());
       authenticationManager.authenticate(authToken);
     } catch (BadCredentialsException ex) {
-      throw new BadCredentialsException("Invalid email or password");
+      throw new BadCredentialsException("Invalid credentials");
     }
 
-    User user = userRepository.findByEmail(request.getEmail())
-        .orElseThrow(() -> new BadCredentialsException("Invalid email or password"));
+    User user = userRepository.findByIdentifier(request.getIdentifier())
+        .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
 
     String token = jwtService.generateToken(
         user.getId(),
