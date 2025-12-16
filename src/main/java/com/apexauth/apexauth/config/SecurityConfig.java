@@ -4,6 +4,7 @@ import com.apexauth.apexauth.security.CustomUserDetailsService;
 import com.apexauth.apexauth.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
+@EnableMethodSecurity // Enables @PreAuthorize annotations
 public class SecurityConfig {
 
   private final CustomUserDetailsService userDetailsService;
@@ -39,7 +41,14 @@ public class SecurityConfig {
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/ping", "/auth/register", "/auth/login", "/actuator/health").permitAll()
+            .requestMatchers(
+                "/ping", 
+                "/auth/register", 
+                "/auth/login", 
+                "/actuator/health",
+                "/swagger-ui/**",
+                "/v3/api-docs/**"
+            ).permitAll()
             .anyRequest().authenticated())
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     return http.build();
