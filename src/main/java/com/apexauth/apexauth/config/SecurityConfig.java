@@ -42,12 +42,14 @@ public class SecurityConfig {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
             .requestMatchers(
-                "/ping", 
-                "/auth/register", 
-                "/auth/login", 
+                "/test/**",
+                "/auth/register",
+                "/auth/login",
+                "/auth/refresh",
                 "/actuator/health",
                 "/swagger-ui/**",
-                "/v3/api-docs/**"
+                "/v3/api-docs/**",
+                "/swagger-ui.html"
             ).permitAll()
             .anyRequest().authenticated())
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
