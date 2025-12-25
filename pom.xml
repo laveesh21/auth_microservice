@@ -119,6 +119,7 @@
     
 
 	<build>
+		<finalName>apexauth</finalName> <!-- Remove version from name -->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

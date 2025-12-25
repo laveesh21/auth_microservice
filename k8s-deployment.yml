@@ -1,0 +1,61 @@
+# Kubernetes Production Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apexauth
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: apexauth
+  template:
+    metadata:
+      labels:
+        app: apexauth
+    spec:
+      containers:
+      - name: apexauth
+        image: yourname/apexauth:1.0.0
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_URL
+          valueFrom:
+            secretKeyRef:
+              name: apexauth-secrets
+              key: db-url
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: apexauth-secrets
+              key: db-password
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: apexauth-secrets
+              key: jwt-secret
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apexauth-service
+spec:
+  selector:
+    app: apexauth
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: LoadBalancer

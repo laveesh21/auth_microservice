@@ -1,0 +1,44 @@
+# PRODUCTION DOCKERFILE
+# Optimized for size, security, and performance
+
+# Stage 1: Build
+FROM maven:3.9-eclipse-temurin-25 AS builder
+
+WORKDIR /build
+COPY pom.xml .
+RUN mvn dependency:go-offline -q
+
+COPY src ./src
+RUN mvn clean package -DskipTests -q
+
+# Stage 2: Runtime (Security Hardened)
+FROM eclipse-temurin:25-jre-noble
+
+# Create non-root user
+RUN groupadd -r appgroup && useradd -r -g appgroup -u 1000 appuser
+
+WORKDIR /app
+
+# Copy JAR
+COPY --from=builder /build/target/*.jar app.jar
+
+# Security: Change ownership
+RUN chown -R appuser:appgroup /app
+
+# Switch to non-root user
+USER appuser
+
+# Expose port
+EXPOSE 8080
+
+# Health check with longer startup time
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:8080/actuator/health || exit 1
+
+# JVM optimizations for production
+ENTRYPOINT ["java", \
+  "-XX:+UseG1GC", \
+  "-XX:MaxRAMPercentage=75.0", \
+  "-XX:+UseStringDeduplication", \
+  "-Djava.security.egd=file:/dev/./urandom", \
+  "-jar", "app.jar"]

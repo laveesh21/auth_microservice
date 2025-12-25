@@ -1,0 +1,27 @@
+# UNIVERSAL docker-compose
+# Works for: Local, Staging, Production (single server)
+
+services:
+  apexauth:
+    # Option 1: Build from Dockerfile
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE:-Dockerfile}
+    
+    # Option 2: Use pre-built image (comment out build above)
+    # image: ${IMAGE_NAME:-apexauth:dev}
+    
+    container_name: apexauth-app
+    env_file:
+      - .env.docker
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
