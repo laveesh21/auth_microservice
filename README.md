@@ -1,4 +1,4 @@
-# 🔐 ApexAuth - Authentication Microservice
+# ApexAuth - Authentication Microservice
 
 A production-ready authentication and authorization microservice built with Spring Boot 4.0, featuring JWT-based authentication, refresh tokens, and role-based access control.
 
@@ -9,7 +9,7 @@ A production-ready authentication and authorization microservice built with Spri
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
@@ -166,7 +166,7 @@ docker-compose logs -f
 
 ---
 
-## 📚 API Documentation
+## API Documentation
 
 Once the application is running, access the interactive API documentation:
 
@@ -176,7 +176,7 @@ Once the application is running, access the interactive API documentation:
 
 ---
 
-## 🔧 Environment Configuration
+## Environment Configuration
 
 ### Required Environment Variables
 
@@ -316,7 +316,7 @@ docker push yourname/apexauth:1.0.0
 
 ---
 
-## 💻 Development
+## Development
 
 ### Running Tests
 
@@ -358,7 +358,7 @@ curl http://localhost:8080/actuator/health
 
 ---
 
-## 🌐 Production Deployment
+## Production Deployment
 
 ### Using Docker Compose
 
@@ -409,7 +409,7 @@ docker run -d \
 
 ---
 
-## 📊 Project Structure
+## Project Structure
 
 ```
 apexauth/
@@ -443,7 +443,7 @@ apexauth/
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -455,21 +455,15 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📝 License
+## Contact
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+**Project Link:** [https://github.com/laveesh21/auth_microservice](https://github.com/laveesh21/auth_microservice)
 
----
-
-## 📧 Contact
-
-**Project Link:** [https://github.com/yourname/apexauth](https://github.com/yourname/apexauth)
-
-**Issues:** [https://github.com/yourname/apexauth/issues](https://github.com/yourname/apexauth/issues)
+**Issues:** [https://github.com/laveesh21/auth_microservice/issues](https://github.com/laveesh21/auth_microservice/issues)
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [JWT.io](https://jwt.io/)
@@ -478,7 +472,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 📈 Roadmap
+## Roadmap
 
 - [ ] Email verification
 - [ ] Password reset flow
