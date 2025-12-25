@@ -63,7 +63,7 @@ A production-ready authentication and authorization microservice built with Spri
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                  Client Applications                    │
-│         (React, Angular, Mobile Apps, etc.)            │
+│          (React, Angular, Mobile Apps, etc.)            │
 └────────────────────┬────────────────────────────────────┘
                      │
                      │ HTTP/HTTPS + JWT
@@ -71,25 +71,25 @@ A production-ready authentication and authorization microservice built with Spri
 ┌────────────────────▼────────────────────────────────────┐
 │              ApexAuth Microservice                      │
 │                                                         │
-│  ┌─────────────────────────────────────────────────┐  │
-│  │  Public Endpoints                               │  │
-│  │  • POST /auth/register                          │  │
-│  │  • POST /auth/login                             │  │
-│  │  • POST /auth/refresh                           │  │
-│  └─────────────────────────────────────────────────┘  │
+│   ┌─────────────────────────────────────────────────┐   │
+│   │  Public Endpoints                               │   │
+│   │  • POST /auth/register                          │   │
+│   │  • POST /auth/login                             │   │
+│   │  • POST /auth/refresh                           │   │
+│   └─────────────────────────────────────────────────┘   │
 │                                                         │
-│  ┌─────────────────────────────────────────────────┐  │
-│  │  Protected Endpoints (JWT Required)             │  │
-│  │  • GET  /auth/me                                │  │
-│  │  • GET  /user/profile                           │  │
-│  └─────────────────────────────────────────────────┘  │
+│   ┌─────────────────────────────────────────────────┐   │
+│   │  Protected Endpoints (JWT Required)             │   │
+│   │  • GET  /auth/me                                │   │
+│   │  • GET  /user/profile                           │   │
+│   └─────────────────────────────────────────────────┘   │
 │                                                         │
-│  ┌─────────────────────────────────────────────────┐  │
-│  │  Admin Endpoints (ROLE_ADMIN Required)          │  │
-│  │  • GET    /admin/stats                          │  │
-│  │  • GET    /admin/users                          │  │
-│  │  • DELETE /admin/users/{id}                     │  │
-│  └─────────────────────────────────────────────────┘  │
+│   ┌─────────────────────────────────────────────────┐   │
+│   │  Admin Endpoints (ROLE_ADMIN Required)          │   │
+│   │  • GET    /admin/stats                          │   │
+│   │  • GET    /admin/users                          │   │
+│   │  • DELETE /admin/users/{id}                     │   │
+│   └─────────────────────────────────────────────────┘   │
 │                                                         │
 └────────────────────┬────────────────────────────────────┘
                      │
