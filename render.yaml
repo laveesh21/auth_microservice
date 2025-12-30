@@ -1,0 +1,45 @@
+# Render deployment configuration
+
+services:
+  # ApexAuth Web Service
+  - type: web
+    name: apexauth
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    dockerfilePath: ./Dockerfile.prod
+    
+    # Environment variables
+    envVars:
+      # Neon PostgreSQL connection (paste your connection string)
+      - key: DB_URL
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      
+      # JWT Configuration
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION_MS
+        value: 900000
+      - key: JWT_REFRESH_EXPIRATION_MS
+        value: 604800000
+      
+      # Server Configuration
+      - key: PORT
+        value: 8080
+      - key: SPRING_PROFILE
+        value: prod
+      
+      # CORS Configuration (allow all for demo)
+      - key: CORS_ALLOWED_ORIGINS
+        value: "*"
+    
+    # Health check
+    healthCheckPath: /actuator/health
+    
+    # Auto-deploy on push
+    autoDeploy: true

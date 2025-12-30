@@ -42,7 +42,8 @@ public class SecurityConfig {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth
             .requestMatchers(
-                "/test/**",
+                "/",                      // Landing page
+                "/index.html",            // Landing page
                 "/auth/register",
                 "/auth/login",
                 "/auth/refresh",

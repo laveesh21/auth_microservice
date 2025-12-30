@@ -1,29 +1,25 @@
-# ApexAuth - Authentication Microservice
+# 🔐 ApexAuth - Authentication Microservice
 
-A production-ready authentication and authorization microservice built with Spring Boot 4.0, featuring JWT-based authentication, refresh tokens, and role-based access control.
-
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success.svg)](https://apexauth.onrender.com)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+> **🌐 Live Demo:** [https://apexauth.onrender.com](https://apexauth.onrender.com)
+
+A production-ready authentication microservice featuring JWT tokens, refresh tokens, role-based access control, and comprehensive API documentation.
 
 ---
 
-## Table of Contents
+## 🎯 Try It Live!
 
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
-- [Quick Start](#-quick-start)
-- [API Documentation](#-api-documentation)
-- [Environment Configuration](#-environment-configuration)
-- [Docker Deployment](#-docker-deployment)
-- [API Endpoints](#-api-endpoints)
-- [Security](#-security)
-- [Development](#-development)
-- [Production Deployment](#-production-deployment)
-- [Contributing](#-contributing)
-- [License](#-license)
+**👉 Visit:** [https://apexauth.onrender.com](https://apexauth.onrender.com)
+
+**Test Accounts:**
+- **User:** `user@demo.com` / `demo123`
+- **Admin:** `admin@demo.com` / `admin123`
+
+**Interactive Docs:** [Swagger UI](https://apexauth.onrender.com/swagger-ui/index.html)
 
 ---
 
@@ -158,10 +154,10 @@ cp .env.docker.example .env.docker
 nano .env.docker
 
 # Build and run
-docker-compose up -d
+docker compose up -d
 
 # View logs
-docker-compose logs -f
+docker compose logs -f
 ```
 
 ---
@@ -220,7 +216,7 @@ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1
 docker build -t apexauth:dev .
 
 # Run container
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Production Build
@@ -368,10 +364,10 @@ cp .env.docker.example .env.docker
 nano .env.docker  # Configure for production
 
 # 2. Build production image
-DOCKERFILE=Dockerfile.prod docker-compose build
+DOCKERFILE=Dockerfile.prod docker compose build
 
 # 3. Deploy
-docker-compose up -d
+docker compose up -d
 
 # 4. Verify
 curl https://your-domain.com/actuator/health
